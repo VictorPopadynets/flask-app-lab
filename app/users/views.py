@@ -61,15 +61,16 @@ def logout():
     flash("Ви вийшли із системи.", "info")
     return redirect(url_for("user_name.login"))
 
-@bp.route("/set_color/<string:scheme>")
-def set_color(scheme):
+@bp.route("/set_color/<string:color>")
+def set_color(color):
     if "username" in session:
         response = make_response(redirect(url_for("user_name.get_profile")))
-        response.set_cookie("color_scheme", scheme, max_age=30*24*60*60)  # Зберігаємо вибір на 30 днів
-        flash(f"Колірна схема змінена на '{scheme}'", "info")
+        response.set_cookie("color_scheme", color, max_age=30*24*60*60)  # Зберігаємо вибір на 30 днів
+        flash(f"Колірна схема змінена на '{color}'", "info")
         return response
     flash("Вам потрібно увійти, щоб змінити кольорову схему.", "danger")
     return redirect(url_for("user_name.login"))
+
 
 @bp.route("/add_cookie", methods=["POST"])
 def add_cookie():
