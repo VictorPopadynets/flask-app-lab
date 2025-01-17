@@ -1,0 +1,120 @@
+/* Загальні стилі */
+body {
+    background: linear-gradient(135deg, #e8f0ff, #b0c4de);
+    font-family: 'Roboto', sans-serif;
+    color: #222;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Хедер */
+header .navbar {
+    background-color: #1c3d5a;
+    padding: 15px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .nav-link {
+    color: #f0f0f0;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease-in-out;
+}
+
+header .nav-link.active,
+header .nav-link:hover {
+    color: #ff7f50;
+}
+
+/* Футер */
+.custom-footer {
+    background: linear-gradient(180deg, #1c1f25, #121416);
+    padding: 40px 20px;
+    font-size: 15px;
+    color: #bdbdbd;
+    text-align: center;
+}
+
+.custom-footer a {
+    color: #4ac8c8;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+}
+
+.custom-footer a:hover {
+    color: #2aaba5;
+    text-decoration: underline;
+}
+
+.custom-footer p {
+    line-height: 1.8;
+    margin: 10px 0 0;
+}
+
+.custom-footer .container {
+    text-align: center;
+}
+
+/* Основний контент */
+main {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+main h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+main p {
+    font-size: 1.25rem;
+    color: #555;
+    line-height: 1.7;
+    max-width: 800px;
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+    header .nav-link {
+        font-size: 14px;
+        margin: 0 5px;
+    }
+
+    main h1 {
+        font-size: 2rem;
+    }
+
+    main p {
+        font-size: 1rem;
+    }
+
+    .custom-footer {
+        padding: 30px 15px;
+    }
+}

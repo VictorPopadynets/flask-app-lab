@@ -1,15 +1,17 @@
-from flask import Flask
+from flask import Flask, render_template
 
-def create_app():
-    app = Flask(__name__)
 
-    @app.route('/')
-    def main():
-        return "Hello World!"
+from flask import Flask, render_template
 
-    return app
+app = Flask(__name__)
 
-app = create_app()
+@app.route('/')
+def main():
+    return render_template("index.html")
+
+@app.route('/resume')
+def get_resume():
+    return render_template("resume.html", page_title="Моє резюме")
 
 if __name__ == '__main__':
     app.run(debug=True)
