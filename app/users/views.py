@@ -2,13 +2,8 @@ from . import bp
 from flask import render_template, redirect, request, url_for, make_response, session, flash
 from datetime import timedelta, datetime
 
-# Демо-дані для автентифікації
 DEMO_USERNAME = "admin"
 DEMO_PASSWORD = "password123"
-
-
-
-
 
 @bp.route("/hi/<string:name>")   #/hi/ivan?age=45
 def greetings(name):
@@ -23,10 +18,6 @@ def admin():
     to_url = url_for("user_name.greetings", name="administrator", age=45, _external=True)     # "http://localhost:8080/hi/administrator?age=45"
     print(to_url)
     return redirect(to_url)
-
-
-
-
 
 @bp.route("/login", methods=['GET', 'POST'])
 def login():
@@ -45,14 +36,7 @@ def login():
 
     return render_template("login.html")
 
-@bp.route("/profile")
-def get_profile():
-    if "username" in session:
-        username = session["username"]
-        color_scheme = request.cookies.get("color_scheme", "light")
-        return render_template("profile.html", username=username, color_scheme=color_scheme)
-    flash("Будь ласка, увійдіть, щоб переглянути профіль.", "danger")
-    return redirect(url_for("user_name.login"))
+
 
 # Route для виходу
 @bp.route("/logout")
@@ -65,12 +49,22 @@ def logout():
 def set_color(color):
     if "username" in session:
         response = make_response(redirect(url_for("user_name.get_profile")))
-        response.set_cookie("color_scheme", color, max_age=30*24*60*60)  # Зберігаємо вибір на 30 днів
+        response.set_cookie("color_scheme", color, max_age=30*24*60*60)
         flash(f"Колірна схема змінена на '{color}'", "info")
         return response
     flash("Вам потрібно увійти, щоб змінити кольорову схему.", "danger")
     return redirect(url_for("user_name.login"))
 
+
+
+@bp.route("/profile")
+def get_profile():
+    if "username" in session:
+        username = session["username"]
+        cookies = request.cookies  # Отримання всіх кукі
+        return render_template("profile.html", username=username, cookies=cookies)
+    flash("Будь ласка, увійдіть, щоб переглянути профіль.", "danger")
+    return redirect(url_for("user_name.login"))
 
 @bp.route("/add_cookie", methods=["POST"])
 def add_cookie():
@@ -78,9 +72,10 @@ def add_cookie():
         key = request.form.get("key")
         value = request.form.get("value")
         expiry = int(request.form.get("expiry"))
+
         response = make_response(redirect(url_for("user_name.get_profile")))
         response.set_cookie(key, value, max_age=expiry)
-        flash(f"Кука '{key}' додана успішно!", "success")
+        flash(f"Кука '{key}' успішно додана!", "success")
         return response
     flash("Вам потрібно увійти, щоб керувати кукі.", "danger")
     return redirect(url_for("user_name.login"))
@@ -88,10 +83,10 @@ def add_cookie():
 @bp.route("/delete_cookie_by_key", methods=["POST"])
 def delete_cookie_by_key():
     if "username" in session:
-        key = request.form.get("cookie_key")  # Отримуємо ключ з форми
+        key = request.form.get("cookie_key")
         response = make_response(redirect(url_for("user_name.get_profile")))
         response.set_cookie(key, "", expires=0)
-        flash(f"Кука '{key}' видалена успішно!", "info")
+        flash(f"Кука '{key}' успішно видалена!", "info")
         return response
     flash("Вам потрібно увійти, щоб видалити кукі.", "danger")
     return redirect(url_for("user_name.login"))
@@ -102,7 +97,7 @@ def delete_all_cookies():
         response = make_response(redirect(url_for("user_name.get_profile")))
         for key in request.cookies.keys():
             response.set_cookie(key, "", expires=0)
-        flash("Всі кукі видалені успішно!", "info")
+        flash("Усі кукі успішно видалені!", "info")
         return response
     flash("Вам потрібно увійти, щоб керувати кукі.", "danger")
     return redirect(url_for("user_name.login"))

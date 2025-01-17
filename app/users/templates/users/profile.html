@@ -14,20 +14,34 @@
     </div>
 
     <h2>Додати кукі</h2>
-    <form action="" method="post" class="w-50 mb-4">
+    <form action="{{ url_for('user_name.add_cookie') }}" method="post" class="w-50 mb-4">
         <div class="mb-3">
             <label for="key-cookie" class="form-label">Ключ</label>
-            <input type="text" class="form-control" id="key-cookie" name="key-cookie" required>
+            <input type="text" class="form-control" id="key-cookie" name="key" required>
         </div>
         <div class="mb-3">
             <label for="value-cookie" class="form-label">Значення</label>
-            <input type="text" class="form-control" id="value-cookie" name="value-cookie" required>
+            <input type="text" class="form-control" id="value-cookie" name="value" required>
         </div>
         <div class="mb-3">
             <label for="expires" class="form-label">Термін дії (сек)</label>
-            <input type="number" class="form-control" id="expires" name="expires" required>
+            <input type="number" class="form-control" id="expires" name="expiry" required>
         </div>
         <button type="submit" class="btn btn-primary">Додати кукі</button>
+    </form>
+
+    <h2>Видалити кукі за ключем</h2>
+    <form action="{{ url_for('user_name.delete_cookie_by_key') }}" method="post" class="w-50 mb-4">
+        <div class="mb-3">
+            <label for="cookie-key" class="form-label">Ключ кукі</label>
+            <input type="text" class="form-control" id="cookie-key" name="cookie_key" required>
+        </div>
+        <button type="submit" class="btn btn-danger">Видалити кукі</button>
+    </form>
+
+    <h2>Видалити всі кукі</h2>
+    <form action="{{ url_for('user_name.delete_all_cookies') }}" method="post" class="w-50 mb-4">
+        <button type="submit" class="btn btn-danger">Видалити всі кукі</button>
     </form>
 
     <h2>Список усіх кукі</h2>
