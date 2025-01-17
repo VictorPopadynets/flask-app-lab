@@ -12,5 +12,4 @@ def home():
 
     return render_template("home.html", agent=agent)
 
-#users
 

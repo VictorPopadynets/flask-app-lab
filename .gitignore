@@ -3,10 +3,15 @@
 .venv/
 .venv*/
 venv*/
-**/__pycache__/
-__pycache__/
 dist/
 .coverage*
 htmlcov/
 .tox/
 docs/_build/
+__*
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
