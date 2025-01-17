@@ -1,0 +1,35 @@
+<!-- app/users/templates/users/hi.html -->
+{% extends 'base.html' %}
+
+{% block title %}Greeting Page{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Вертикальне меню (sidebar) -->
+    <div class="col-md-3">
+        <div class="list-group">
+            <a href="{{ url_for('users.greetings', name='John') }}" class="list-group-item list-group-item-action">
+                Greet John
+            </a>
+            <a href="{{ url_for('users.greetings', name='Jane') }}" class="list-group-item list-group-item-action">
+                Greet Jane
+            </a>
+            <a href="{{ url_for('users.admin') }}" class="list-group-item list-group-item-action">
+                Admin Panel
+            </a>
+        </div>
+    </div>
+
+    <!-- Основний контент сторінки -->
+    <div class="col-md-9">
+        <h1 class="display-4">Hello :)</h1>
+        <h2 class="mt-4">User: {{ name }}</h2>
+
+        {% if age %}
+            <h3 class="text-success">Age: {{ age }}</h3>
+        {% else %}
+            <h3 class="text-danger">Age: Not provided</h3>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
