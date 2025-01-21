@@ -1,17 +1,29 @@
 {% extends 'base.html' %}
 
-{% block title %} POSTS {% endblock %}
+{% block title %}POSTS{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('posts.static', filename='css/posts.css') }} ">
+ {% endblock %}
 
 {% block content %}
-
-<h1>Articles</h1>
-    
-<ul>
-    {% for post in posts%}
-        <li> {{post["id"]}} -  
-            <a href="{{post['id']}}">{{post["title"]}}</a>
-        </li>
+<h1>Пости</h1>
+    <a href="{{ url_for('posts.add_post') }}" class="btn">Add new post</a>  <br><br>
+<div class="row" class="posts">
+    {% for post in posts %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+          <img src="{{ url_for('posts.static', filename='img/post.jpg') }}" alt="post_python">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post["title"] }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ post["category"] }}</h6>
+                    <p class="card-text">{{ post["content"] | truncate(23) }}</p>
+                    <p class="card-text"><small class="text-muted">Author: {{ post["author"] }}</small></p>
+                    <p class="card-text"><small class="text-muted">Published on: {{ post["publication_date"] }}</small></p>
+                    <a href="{{ url_for('posts.detail_post', id=post['id']) }}" class="btn">Read more</a>
+                </div>
+            </div>
+        </div>
     {% endfor %}
-</ul>
-
+</div>
 {% endblock %}

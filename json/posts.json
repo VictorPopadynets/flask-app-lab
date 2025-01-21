@@ -7,5 +7,14 @@
         "author": "\u042f",
         "is_active": true,
         "publication_date": "2024-11-05"
+    },
+    {
+        "id": 2,
+        "title": "22",
+        "content": "1\u0446\u0430\u0439\u0430\u0446",
+        "category": "science",
+        "author": "142",
+        "is_active": true,
+        "publication_date": "2024-11-05"
     }
 ]

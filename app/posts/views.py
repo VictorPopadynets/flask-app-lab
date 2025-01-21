@@ -2,16 +2,13 @@ import json
 from . import post_bp
 from flask import render_template, abort, flash, redirect, url_for
 from .forms import PostForm
-
 JSON_FILE = 'json/posts.json'
-
 @post_bp.route('/add_post', methods=['GET', 'POST'])
 def add_post():
     form = PostForm()
     if form.validate_on_submit():
         title = form.title.data
         content = form.content.data
-
         new_post = {
             "id": len(posts) + 1,
             "title": title,
@@ -21,15 +18,12 @@ def add_post():
             "is_active": True,
             "publication_date": "2024-11-05"
         }
-
         posts.append(new_post)
         save_posts(posts)
-
         flash(f'Post "{title}" added successfully!', 'success')
         return redirect(url_for('.get_posts'))
 
     return render_template("add_post.html", form=form)
-
 
 def load_posts():
     try:
@@ -43,8 +37,6 @@ def save_posts(posts):
         json.dump(posts, f, indent=4)
 
 posts = load_posts()
-
-
 @post_bp.route('/') 
 def get_posts():
     return render_template("posts.html", posts=posts)
