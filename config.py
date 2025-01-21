@@ -1,1 +1,1 @@
-SECRET_KEY = "secret-key-sdsfs"
+SECRET_KEY = 'my_secret_key'
