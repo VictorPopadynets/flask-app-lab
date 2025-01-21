@@ -3,7 +3,7 @@ from . import post_bp
 from flask import render_template, abort, flash, redirect, url_for
 from .forms import PostForm
 
-
+JSON_FILE = 'json/posts.json'
 
 @post_bp.route('/add_post', methods=['GET', 'POST'])
 def add_post():
@@ -29,6 +29,21 @@ def add_post():
         return redirect(url_for('.get_posts'))
 
     return render_template("add_post.html", form=form)
+
+
+def load_posts():
+    try:
+        with open(JSON_FILE, 'r') as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
+
+def save_posts(posts):
+    with open(JSON_FILE, 'w') as f:
+        json.dump(posts, f, indent=4)
+
+posts = load_posts()
+
 
 @post_bp.route('/') 
 def get_posts():

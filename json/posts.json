@@ -1,0 +1,11 @@
+[
+    {
+        "id": 1,
+        "title": "\u0442\u0435\u0441\u0442",
+        "content": "\u0442\u0435\u0441\u0442\u043e\u0432\u0438\u0439 \u043f\u043e\u0441\u0442",
+        "category": "lifestyle",
+        "author": "\u042f",
+        "is_active": true,
+        "publication_date": "2024-11-05"
+    }
+]
