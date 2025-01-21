@@ -7,9 +7,11 @@ def main():
 
 @app.route('/homepage') 
 def home():
-    """View for the Home page of your website."""
     agent = request.user_agent
 
-    return render_template("home.html", agent=agent)
+    return render_template("homepage.html", agent=agent)
 
-
+@app.errorhandler(404)
+def page_not_found(error):
+# Відображаємо шаблон 404.html і повертаємо статусний код 404
+    return render_template('404.html'), 404
