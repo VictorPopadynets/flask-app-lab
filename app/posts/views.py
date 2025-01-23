@@ -38,3 +38,41 @@ def detail_post(id):
     # Fetch the post by ID, or return 404 if not found
     post = Post.query.get_or_404(id)
     return render_template("detail_post.html", post=post)
+
+
+@post_bp.route('/delete_post/<int:id>', methods=['POST'])
+def delete_post(id):
+    # Отримання поста за ID або повернення 404
+    post = Post.query.get_or_404(id)
+
+    # Видалення поста
+    db.session.delete(post)
+    db.session.commit()
+
+    # Сповіщення про успішне видалення
+    flash(f'Post "{post.title}" has been deleted successfully!', 'success')
+    return redirect(url_for('.get_posts'))
+
+
+@post_bp.route('/edit_post/<int:id>', methods=['GET', 'POST'])
+def edit_post(id):
+    # Отримуємо пост із бази даних
+    post = db.get_or_404(Post, id)
+    # Ініціалізуємо форму з даними поста
+    form = PostForm(obj=post)
+    form.publish_date.data = post.posted
+    if form.validate_on_submit():
+        # Оновлюємо дані поста з форми
+        post.title = form.title.data
+        post.content = form.content.data
+        post.category = form.category.data
+        post.is_active = form.is_active.data
+        post.posted = form.publish_date.data
+
+        # Зберігаємо зміни у базі даних
+        db.session.commit()
+
+        flash('Post updated successfully!', 'success')
+        return redirect(url_for('.get_posts'))  # Повертаємося до списку постів
+
+    return render_template('edit_post.html', form=form, post=post)

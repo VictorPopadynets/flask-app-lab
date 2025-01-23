@@ -7,4 +7,3 @@ bp = Blueprint("user_name",
                )
 
 from . import views
-
