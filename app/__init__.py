@@ -1,10 +1,8 @@
 from flask import Flask
-from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from sqlalchemy.orm import DeclarativeBase
 
-app = Flask(__name__)
-app.config.from_pyfile("../config.py")
 
 class Base(DeclarativeBase):
     pass
@@ -21,14 +19,11 @@ def create_app(config_name="config"):
     db.init_app(app)
     migrate.init_app(app, db)
 
+    # Імпортуємо та реєструємо blueprints всередині контексту застосунку
     with app.app_context():
-        from . import views
-
         from .posts import post_bp
         from .users import bp as user_bp
         app.register_blueprint(post_bp)
         app.register_blueprint(user_bp, url_prefix="/users")
 
     return app
-
-create_app(config_name="config")

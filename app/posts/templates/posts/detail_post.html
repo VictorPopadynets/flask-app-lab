@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
-{% block title %} POSTS {% endblock %}
+
+{% block title %}POST DETAILS{% endblock %}
+
 {% block content %}
-    <h1>Post № {{post["id"]}} - {{post["title"]}} </h1>
-    <p>{{ post.get('content') }}</p>
-    <a href="{{ url_for("posts.get_posts") }}">Return posts</a>
+    <h1>Post № {{ post.id }} - {{ post.title }}</h1>
+    <p>{{ post.content }}</p>
+    <p>Category: {{ post.category }}</p>
+    <p>Author: {{ post.author }}</p>
+    <p>Posted on: {{ post.posted.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+
+    <a href="{{ url_for('posts.get_posts') }}">Return to posts</a>
 {% endblock %}
