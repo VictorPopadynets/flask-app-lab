@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список контактів</title>
+</head>
+<body>
+    <h1>Список контактів</h1>
+
+    <!-- Форма пошуку -->
+    <form method="GET" action="{{ url_for('contacts.contact_list') }}">
+        <input type="text" name="search" placeholder="Пошук за ім'ям" value="{{ search_query }}">
+        <button type="submit">Пошук</button>
+    </form>
+      <form method="GET" action="{{ url_for('contacts.add_contact') }}">
+        <button type="submit">Додати</button>
+    </form>
+
+    <!-- Сортування -->
+    <div>
+        <a href="{{ url_for('contacts.contact_list', sort='name') }}">Сортувати за іменем</a> |
+        <a href="{{ url_for('contacts.contact_list', sort='email') }}">Сортувати за email</a>
+    </div>
+
+    <!-- Таблиця контактів -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Ім'я</th>
+                <th>Email</th>
+                <th>Телефон</th>
+                <th>Група</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contact in contacts %}
+                <tr>
+                    <td>{{ contact.name }}</td>
+                    <td>{{ contact.email }}</td>
+                    <td>{{ contact.phone }}</td>
+                    <td>{{ contact.group.name if contact.group else "Без групи" }}</td>
+                    <td>
+                        <a href="{{ url_for('contacts.contact_detail', contact_id=contact.id) }}">Переглянути</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
