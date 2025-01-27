@@ -1,0 +1,100 @@
+/* Загальні стилі */
+body {
+    background: linear-gradient(135deg, #e8f0ff, #b0c4de);
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+h1, h2 {
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Форми */
+form {
+    margin-bottom: 20px;
+}
+
+form .form-control {
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+form button {
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+/* Таблиці */
+.table {
+    border: 1px solid #dee2e6;
+    margin-top: 20px;
+}
+
+.table th {
+    background-color: #343a40;
+    color: #fff;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.table td {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.9rem;
+}
+
+/* Кнопки */
+.btn {
+    font-size: 0.9rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* Специфічні стилі */
+.alert {
+    font-size: 1rem;
+    border-radius: 0.5rem;
+}
+
+/* Випадаючий список */
+select.form-select {
+    font-size: 1rem;
+    border-radius: 0.5rem;
+}
+
+/* Список для контактів */
+.contact-details {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Футер */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 40px;
+    background-color: #9f9f9f;
+    color: #000;
+    font-size: 0.8rem;
+    border-top: 3px solid #007bff;
+}

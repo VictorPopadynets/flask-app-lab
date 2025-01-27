@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Редагувати контакт{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('contacts.static', filename='css/style.css') }}">
+{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Редагувати контакт</h1>
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Ім'я:</label>
+            {{ form.name(class_="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            {{ form.email(class_="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            <label for="phone" class="form-label">Телефон:</label>
+            {{ form.phone(class_="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            <label for="group_id" class="form-label">Група:</label>
+            {{ form.group_id(class_="form-control") }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Зберегти</button>
+        <a href="{{ url_for('contacts.contact_list') }}" class="btn btn-secondary">Скасувати</a>
+    </form>
+</div>
+{% endblock %}

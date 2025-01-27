@@ -1,17 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Деталі контакту</title>
-</head>
-<body>
-    <h1>Деталі контакту</h1>
+{% extends "base.html" %}
 
-    <p><strong>Ім'я:</strong> {{ contact.name }}</p>
-    <p><strong>Email:</strong> {{ contact.email }}</p>
-    <p><strong>Телефон:</strong> {{ contact.phone }}</p>
-    <p><strong>Група:</strong> {{ contact.group.name if contact.group else "Без групи" }}</p>
+{% block title %}Деталі контакту{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('contacts.static', filename='css/style.css') }}">
+{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Деталі контакту</h1>
 
-    <a href="{{ url_for('contacts.contact_list') }}">Назад до списку</a>
-</body>
-</html>
+    <div class="card">
+        <div class="card-body">
+            <p><strong>Ім'я:</strong> {{ contact.name }}</p>
+            <p><strong>Email:</strong> {{ contact.email }}</p>
+            <p><strong>Телефон:</strong> {{ contact.phone }}</p>
+            <p><strong>Група:</strong> {{ contact.group.name if contact.group else "Без групи" }}</p>
+            <a href="{{ url_for('contacts.contact_list') }}" class="btn btn-secondary">Назад до списку</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
