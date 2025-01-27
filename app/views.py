@@ -1,18 +1,18 @@
-from flask import request, render_template
-from . import create_app
+from flask import request, redirect, url_for, render_template, current_app
 
-def register_routes(app):
-    @app.route('/')
-    def main():
-        return render_template("base.html")
+# from . import app
 
-    @app.route('/homepage')
-    def home():
-        agent = request.user_agent
-        return render_template("home.html", agent=agent)
+@current_app.route('/')
+def main():
+    return render_template("base.html")
 
-    @app.errorhandler(404)
-    def page_not_found(error):
-        # Відображаємо шаблон 404.html і повертаємо статусний код 404
-        return render_template('404.html'), 404
+@current_app.route('/homepage')
+def home():
+    """View for the Home page of your website."""
+    agent = request.user_agent
+    return render_template("home.html")
 
+@current_app.errorhandler(404)
+def page_not_found(error):
+    # Відображаємо шаблон 404.html і повертаємо статусний код 404
+    return render_template('404.html'), 404
