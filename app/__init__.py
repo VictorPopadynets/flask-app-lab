@@ -19,8 +19,9 @@ def create_app(config_name="config"):
     db.init_app(app)
     migrate.init_app(app, db)
 
-    # Імпортуємо та реєструємо blueprints всередині контексту застосунку
     with app.app_context():
+        from . import views
+
         from .posts import post_bp
         from .users import bp as user_bp
         app.register_blueprint(post_bp)
